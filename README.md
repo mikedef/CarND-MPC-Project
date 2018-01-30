@@ -64,7 +64,7 @@ In this project you'll implement Model Predictive Control to drive the car aroun
 
 ### The Model
 #### Student describes their model in detail. This includes the state, actuators and update equations.
-The model takes in parameters from the simulator to define the cars state
+The kinematic model takes in parameters from the simulator to define the cars state
 ` state << x, y, psi, v, cte, epsi;`
 * x:    x-position
 * y:    y-position
@@ -72,3 +72,13 @@ The model takes in parameters from the simulator to define the cars state
 * v:    vehicles velocity
 * cte:  cross track error
 * epsi: orientation error
+
+Actuator outputs are acceleration and steering angle (delta). The model combines the vehilce state and actuations from the previous timestep to calculate the state for the current timestep. 
+Recall the equations for the model:                              
+* x_[t+1] = x[t] + v[t] * cos(psi[t]) * dt                         
+* y_[t+1] = y[t] + v[t] * sin(psi[t]) * dt                         
+* psi_[t+1] = psi[t] + v[t] / Lf * delta[t] * dt                   
+* v_[t+1] = v[t] + a[t] * dt                                       
+* cte[t+1] = f(x[t]) - y[t] + v[t] * sin(epsi[t]) * dt             
+* epsi[t+1] = psi[t] - psides[t] + v[t] * delta[t] / Lf * dt       
+
