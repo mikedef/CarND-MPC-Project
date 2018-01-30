@@ -66,3 +66,9 @@ In this project you'll implement Model Predictive Control to drive the car aroun
 #### Student describes their model in detail. This includes the state, actuators and update equations.
 The model takes in parameters from the simulator to define the cars state
 ` state << x, y, psi, v, cte, epsi;`
+* x:    x-position
+* y:    y-position
+* psi:  vehicles orientation
+* v:    vehicles velocity
+* cte:  cross track error
+* epsi: orientation error
