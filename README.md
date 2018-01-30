@@ -96,3 +96,6 @@ The waypoints are preprocessed such that the waypoints from the simulator end up
 #### The student implements Model Predictive Control that handles a 100 millisecond latency. Student provides details on how they deal with latency.
 
 In MPC.cpp I deal with the 100 ms latency by using previous actuations in the equations for acceleration and steering angle (see MPC.cpp lines 116-119). Also as per the lessons on MPC, I included cost functions weighing the equations. Also I added a cost function (speed_steer_cost_function) that punishes based on the speed and steering to help the vehicle during steering. 
+
+### MPC Video
+Please see the project video of my vehicle going around the track [here](Add Link Here). 
