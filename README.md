@@ -66,14 +66,14 @@ In this project you'll implement Model Predictive Control to drive the car aroun
 #### Student describes their model in detail. This includes the state, actuators and update equations.
 The kinematic model takes in parameters from the simulator to define the cars state
 ` state << x, y, psi, v, cte, epsi;`
-* x:    x-position
-* y:    y-position
+* x:    x-position of the vehicle in global coordinates
+* y:    y-position of the vehicle in global coordinates
 * psi:  vehicles orientation
 * v:    vehicles velocity
 * cte:  cross track error
 * epsi: orientation error
 
-Actuator outputs are acceleration and steering angle (delta). The model combines the vehilce state and actuations from the previous timestep to calculate the state for the current timestep. 
+Actuator outputs are acceleration (a) and steering angle (delta). The model combines the vehilce state and actuations from the previous timestep to calculate the state for the current timestep. 
 Recall the equations for the model:                              
 * x_[t+1] = x[t] + v[t] * cos(psi[t]) * dt                         
 * y_[t+1] = y[t] + v[t] * sin(psi[t]) * dt                         
@@ -82,3 +82,17 @@ Recall the equations for the model:
 * cte[t+1] = f(x[t]) - y[t] + v[t] * sin(epsi[t]) * dt             
 * epsi[t+1] = psi[t] - psides[t] + v[t] * delta[t] / Lf * dt       
 
+### Timestep Length and Elapsed Duration (N & dt)
+#### Student discusses the reasoning behind the chosen N (timestep length) and dt (elapsed duration between timesteps) values. Additionally the student details the previous values tried.
+
+For Timestep Duration (dt) I used 0.1 seconds to match the delay of 100ms of the simulator. For Tuning Timesteps(N) I ended up using 10 which equates to a 1 second duration between sensor readings and correction. I attempted differend values for N and dt such as 15 and 0.2 or 20 and 0.5, but both ended up in producing erratic driving of the vehicle. 
+
+### Polynomial Fitting and MPC Preprocessing
+#### A polynomial is fitted to waypoints. If the student preprocesses waypoints, the vehicle state, and/or actuators prior to the MPC procedure it is described.
+
+The waypoints are preprocessed such that the waypoints from the simulator end up in the vehicles perspective. This makes it easier to fit a polynomial to the waypoints since the vehicle's x-y coordinates are now the origin and the orientation angle is also transformed to zero. 
+
+### Model Predictive Control with Latency
+#### The student implements Model Predictive Control that handles a 100 millisecond latency. Student provides details on how they deal with latency.
+
+In MPC.cpp I deal with the 100 ms latency by using previous actuations in the equations for acceleration and steering angle (see MPC.cpp lines 116-119). Also as per the lessons on MPC, I included cost functions weighing the equations. Also I added a cost function (speed_steer_cost_function) that punishes based on the speed and steering to help the vehicle during steering. 
