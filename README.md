@@ -60,6 +60,9 @@ for instructions and the project rubric.
 
 ---
 ## Model Predictive Control
+In this project you'll implement Model Predictive Control to drive the car around the track. This time however you're not given the cross track error, you'll have to calculate that yourself! Additionally, there's a 100 millisecond latency between actuations commands on top of the connection latency.
+
 ### The Model
 #### Student describes their model in detail. This includes the state, actuators and update equations.
-
+The model takes in parameters from the simulator to define the cars state
+` state << x, y, psi, v, cte, epsi;`
